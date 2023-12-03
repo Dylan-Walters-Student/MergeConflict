@@ -19,6 +19,7 @@ Library: D:\Unity Projects\MergeConflict\Temp\BurstOutput\tempburstlibs\arm64-v8
 --assembly-defines=Unity.RenderPipeline.Universal.ShaderLibrary;
 --assembly-defines=Unity.RenderPipelines.Core.Runtime;
 --assembly-defines=Unity.RenderPipelines.Universal.Runtime;
+--assembly-defines=Unity.TextMeshPro;
 --assembly-defines=Unity.VisualScripting.Core;
 --assembly-defines=Unity.VisualScripting.Flow;
 --assembly-defines=Unity.XR.ARFoundation;
@@ -107,6 +108,7 @@ Library: D:\Unity Projects\MergeConflict\Temp\BurstOutput\tempburstlibs\arm64-v8
 --assembly-defines=Unity.RenderPipeline.Universal.ShaderLibrary;
 --assembly-defines=Unity.RenderPipelines.Core.Runtime;
 --assembly-defines=Unity.RenderPipelines.Universal.Runtime;
+--assembly-defines=Unity.TextMeshPro;
 --assembly-defines=Unity.VisualScripting.Core;
 --assembly-defines=Unity.VisualScripting.Flow;
 --assembly-defines=Unity.XR.ARFoundation;
