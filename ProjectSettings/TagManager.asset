@@ -3,7 +3,18 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - SuperBall
+  - BigBall
+  - MediumBall
+  - SmallBall
+  - SuperSmallBall
+  - BallOne
+  - BallTwo
+  - BallThree
+  - BallFour
+  - BallFive
+  - BallSix
   layers:
   - Default
   - TransparentFX
