@@ -38,19 +38,19 @@ namespace Merger
                 switch (gameObject.tag)
                 {
                     case "BallOne": // @DW would switching the strings to be BallOne.tag be better?
-                        Instantiate(BallOne, lastPosition, lastRotation);
-                        break;
-                    case "BallTwo":
                         Instantiate(BallTwo, lastPosition, lastRotation);
                         break;
-                    case "BallThree":
+                    case "BallTwo":
                         Instantiate(BallThree, lastPosition, lastRotation);
                         break;
-                    case "BallFour":
+                    case "BallThree":
                         Instantiate(BallFour, lastPosition, lastRotation);
                         break;
-                    case "BallFive":
+                    case "BallFour":
                         Instantiate(BallFive, lastPosition, lastRotation);
+                        break;
+                    case "BallFive":
+                        Instantiate(BallSix, lastPosition, lastRotation);
                         break;
                     case "BallSix":
                         //give points
