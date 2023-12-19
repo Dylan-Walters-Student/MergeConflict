@@ -12,7 +12,7 @@ public class Spawner : MonoBehaviour
 
     [SerializeField] float lowSpawnSpeed, HighSpawnSpeed;
 
-    [SerializeField] float spawnRadius = 0.3f;
+    [SerializeField] float spawnRadius = 0.28f;
 
     float waitingTime;
 

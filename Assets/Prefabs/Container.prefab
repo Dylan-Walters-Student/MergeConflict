@@ -4899,7 +4899,7 @@ MonoBehaviour:
     type: 3}
   lowSpawnSpeed: 2
   HighSpawnSpeed: 4
-  spawnRadius: 0.3
+  spawnRadius: 0.28
 --- !u!1 &4154977340278338373
 GameObject:
   m_ObjectHideFlags: 0
