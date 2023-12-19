@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Merger
@@ -7,28 +8,39 @@ namespace Merger
         public bool doNothing;
 
         [SerializeField]
-        private GameObject BallOne;
+        private GameObject ballTwo;
 
         [SerializeField]
-        private GameObject BallTwo;
+        private GameObject ballThree;
 
         [SerializeField]
-        private GameObject BallThree;
+        private GameObject ballFour;
 
         [SerializeField]
-        private GameObject BallFour;
+        private GameObject ballFive;
 
         [SerializeField]
-        private GameObject BallFive;
+        private GameObject ballSix;
 
         [SerializeField]
-        private GameObject BallSix;
+        private GameObject ballSeven;
+
+        private bool mergable;
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.tag == "MergeZone")
+            {
+                mergable = true;
+            }
+            
+        }
 
         private void OnCollisionEnter(Collision collision)
         {
-            if (collision.gameObject.tag == gameObject.tag && gameObject.tag != BallSix.tag)
+            if (collision.gameObject.tag == gameObject.tag && gameObject.tag != ballSeven.tag && mergable)
             {
-                 if (doNothing) return; // does nothing
+                 if (doNothing) return;
 
                  collision.gameObject.GetComponent<Merger>().doNothing = true; // sets other game object to do nothing
                  Destroy(collision.gameObject); // destroys other game object
@@ -37,28 +49,31 @@ namespace Merger
                 Quaternion lastRotation = transform.rotation;
                 switch (gameObject.tag)
                 {
-                    case "BallOne": // @DW would switching the strings to be BallOne.tag be better?
-                        Instantiate(BallTwo, lastPosition, lastRotation);
+                    case "BallOne":
+                        Instantiate(ballTwo, lastPosition, lastRotation);
                         break;
                     case "BallTwo":
-                        Instantiate(BallThree, lastPosition, lastRotation);
+                        Instantiate(ballThree, lastPosition, lastRotation);
                         break;
                     case "BallThree":
-                        Instantiate(BallFour, lastPosition, lastRotation);
+                        Instantiate(ballFour, lastPosition, lastRotation);
                         break;
                     case "BallFour":
-                        Instantiate(BallFive, lastPosition, lastRotation);
+                        Instantiate(ballFive, lastPosition, lastRotation);
                         break;
                     case "BallFive":
-                        Instantiate(BallSix, lastPosition, lastRotation);
+                        Instantiate(ballSix, lastPosition, lastRotation);
                         break;
                     case "BallSix":
-                        //give points
-                        //Win
+                        Instantiate(ballSeven, lastPosition, lastRotation);
+                        break;
+                    case "BallSeven":
+                        Debug.Log("Win");
                         break;
                 }
 
-                 Destroy(gameObject);
+                Destroy(gameObject);
+                mergable = false;
             }
         }
     }
