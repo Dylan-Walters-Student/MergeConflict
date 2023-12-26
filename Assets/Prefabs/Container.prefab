@@ -4893,13 +4893,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc29739cdfdd53d42855df59c9a52468, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameActive: 0
   ballOne: {fileID: 4393183295525201456, guid: a9fa30572f21d614ea5958503d77e310, type: 3}
   balltwo: {fileID: 1253418801390527327, guid: f1cce767c48e06a40acceac4a508df83, type: 3}
   ballThree: {fileID: 1018555988309545689, guid: 86fa84271eca030478e6e6ffca558096,
     type: 3}
   lowSpawnSpeed: 2
   HighSpawnSpeed: 4
-  spawnRadius: 0.28
+  spawnRadius: 0.25
 --- !u!1 &4154977340278338373
 GameObject:
   m_ObjectHideFlags: 0

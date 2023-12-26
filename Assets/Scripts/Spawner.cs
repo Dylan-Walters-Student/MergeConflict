@@ -70,10 +70,18 @@ public class Spawner : MonoBehaviour
         }
     }
 
+    public bool getGameStatus() {
+        return gameActive;
+    }
+
     public void setGameActive() {
         // remove previous balls here --
         Destroy(ballHolder);
         ballHolder = new GameObject("GameBallHolder");
         gameActive = true;
+    }
+
+    public void setGamePaused() {
+        gameActive = false;
     }
 }
