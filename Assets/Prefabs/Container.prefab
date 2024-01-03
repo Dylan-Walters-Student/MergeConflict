@@ -4900,7 +4900,7 @@ MonoBehaviour:
     type: 3}
   lowSpawnSpeed: 2
   HighSpawnSpeed: 4
-  spawnRadius: 0.25
+  spawnRadius: 0.28
 --- !u!1 &4154977340278338373
 GameObject:
   m_ObjectHideFlags: 0
@@ -6612,7 +6612,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4154977341773975231}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.979, y: 0.499, z: 0.6529443}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

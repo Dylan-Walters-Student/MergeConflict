@@ -2,26 +2,49 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UIElements;
 
 public class PlayManager : MonoBehaviour
 {
+    // ui and spawner
     [SerializeField] Spawner spawner;
-    [SerializeField] TMP_Text playText;
-    
+    [SerializeField] Canvas MainMenu;
+
+    // timer
+    float saveTime;
+    [SerializeField] float timeRemaining;
+    [SerializeField] TMP_Text timeText;
+
     public void Play(){
         if(spawner.getGameStatus()){
-            spawner.setGamePaused();
-            playText.text = "Play";
-        } else {
-            spawner.setGameActive();
-            playText.text = "Stop!";
+            spawner.setGameActive(); // starts game, resets field
+            MainMenu.enabled = false;
+            saveTime = timeRemaining;
+            Timer(true);
+        }
+        else {
+            spawner.setGamePaused(); //pauses game -- basically stops cant unpause only restart
+            MainMenu.enabled = true;
+            Timer(false);
+            timeRemaining = saveTime;
+            //calculate score
         }
     }
 
-    public void CalculateScore() {
-        //get all balls that have merge enabled
-        //score each ball based on their scoring value
-        //instantiate menu item popup with a score
-        //if its a new highscore put it on the main menu otherwise forget about it
+    void Timer(bool gameRunning)
+    {
+        if (!gameRunning)
+        {
+            timeRemaining -= Time.deltaTime;
+
+            float minutes = Mathf.FloorToInt(timeRemaining / 60);
+            float seconds = Mathf.FloorToInt(timeRemaining % 60);
+            timeText.text = string.Format("{0:00} : {1:00}", minutes, seconds);
+
+            if (timeRemaining <= 0)
+            {
+                spawner.setGamePaused();
+            }
+        }
     }
 }
