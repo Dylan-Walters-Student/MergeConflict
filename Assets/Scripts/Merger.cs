@@ -7,6 +7,11 @@ namespace Merger
     {
         public bool doNothing;
 
+        private bool mergable;
+
+        [SerializeField]
+        private PlayManager playManager;
+
         [SerializeField]
         private GameObject ballTwo;
 
@@ -25,15 +30,12 @@ namespace Merger
         [SerializeField]
         private GameObject ballSeven;
 
-        private bool mergable;
-
         private void OnTriggerEnter(Collider other)
         {
-            if (other.tag == "MergeZone")
+            if (other.tag == "MergeZone" && !playManager.GetGameStatus())
             {
                 mergable = true;
             }
-            
         }
 
         private void OnCollisionEnter(Collision collision)
@@ -51,24 +53,31 @@ namespace Merger
                 {
                     case "BallOne":
                         Instantiate(ballTwo, lastPosition, lastRotation);
+                        playManager.AddToMatchScore(1);
                         break;
                     case "BallTwo":
                         Instantiate(ballThree, lastPosition, lastRotation);
+                        playManager.AddToMatchScore(2);
                         break;
                     case "BallThree":
                         Instantiate(ballFour, lastPosition, lastRotation);
+                        playManager.AddToMatchScore(4);
                         break;
                     case "BallFour":
                         Instantiate(ballFive, lastPosition, lastRotation);
+                        playManager.AddToMatchScore(8);
                         break;
                     case "BallFive":
                         Instantiate(ballSix, lastPosition, lastRotation);
+                        playManager.AddToMatchScore(16);
                         break;
                     case "BallSix":
                         Instantiate(ballSeven, lastPosition, lastRotation);
+                        playManager.AddToMatchScore(32);
                         break;
                     case "BallSeven":
-                        Debug.Log("Win");
+                        playManager.AddToMatchScore(64);
+                        playManager.WinLose();
                         break;
                 }
 

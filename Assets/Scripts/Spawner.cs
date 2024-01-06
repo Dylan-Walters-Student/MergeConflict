@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    [SerializeField] bool gameActive;
+    [SerializeField] PlayManager playManager;
 
     [SerializeField] GameObject ballOne;
 
@@ -27,14 +27,14 @@ public class Spawner : MonoBehaviour
 
     void Start()
     {
-        gameActive = false;
         ballHolder = new GameObject("GameBallHolder");
         waitingTime = Random.Range(lowSpawnSpeed, HighSpawnSpeed);
     }
 
     void Update()
     {
-        if (gameActive){
+        if (!playManager.GetGameStatus())
+        {
             SpawnBalls();
         }
     }
@@ -44,6 +44,7 @@ public class Spawner : MonoBehaviour
 
         if (lowSpawnSpeed < -0.2f && HighSpawnSpeed > 0.2f)
         {
+            // the idea is to increase spawn rate as the game goes on. Fix?
             decrementTime *= 1.00005f;
             lowSpawnSpeed += decrementTime;
             HighSpawnSpeed -= decrementTime;
@@ -58,9 +59,9 @@ public class Spawner : MonoBehaviour
             Quaternion rotation = transform.rotation; //Rotation here is of the spawner this may be odd if using non-ball prefabs
 
             int randomBall = Random.Range(0, 100);
-            if (randomBall < 50)
+            if (randomBall < 70)
                 Instantiate(ballOne, position, rotation, ballHolder.transform);
-            else if (randomBall < 85)
+            else if (randomBall < 90)
                 Instantiate(balltwo, position, rotation, ballHolder.transform);
             else
                 Instantiate(ballThree, position, rotation, ballHolder.transform);
@@ -70,18 +71,8 @@ public class Spawner : MonoBehaviour
         }
     }
 
-    public bool getGameStatus() {
-        return gameActive;
-    }
-
-    public void setGameActive() {
-        // remove previous balls here --
+    public void DestroyPreviousBalls() {
         Destroy(ballHolder);
         ballHolder = new GameObject("GameBallHolder");
-        gameActive = true;
-    }
-
-    public void setGamePaused() {
-        gameActive = false;
     }
 }

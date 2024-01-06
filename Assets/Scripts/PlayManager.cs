@@ -6,45 +6,97 @@ using UnityEngine.UIElements;
 
 public class PlayManager : MonoBehaviour
 {
-    // ui and spawner
+    [SerializeField] bool gamePaused;
+
     [SerializeField] Spawner spawner;
     [SerializeField] Canvas MainMenu;
 
-    // timer
-    float saveTime;
-    [SerializeField] float timeRemaining;
     [SerializeField] TMP_Text timeText;
+    [SerializeField] float totalTime = 60f;
+    [SerializeField] float currentTime;
 
-    public void Play(){
-        if(spawner.getGameStatus()){
-            spawner.setGameActive(); // starts game, resets field
-            MainMenu.enabled = false;
-            saveTime = timeRemaining;
-            Timer(true);
+    private int highScore;
+    private int matchScore;
+
+    void Start()
+    {
+        gamePaused = true;
+    }
+
+    void Update()
+    {
+        Timer();
+    }
+
+    public void Play()
+    {
+        MainMenu.enabled = false;
+        gamePaused = false;
+        spawner.DestroyPreviousBalls();
+    }
+
+    public void Pause()
+    {
+        MainMenu.enabled = true;
+        gamePaused = true;
+    }
+
+    public void Continue()
+    {
+        MainMenu.enabled = false;
+        gamePaused = false;
+    }
+
+    //Winning and loosing is the same thing atm
+    //Might seperate later if different conditions apply
+    public void WinLose()
+    {
+        gamePaused = true;
+        MainMenu.enabled = true;
+        currentTime = totalTime;
+
+        // sets match score
+        if (matchScore > highScore)
+        {
+            highScore = matchScore;
         }
-        else {
-            spawner.setGamePaused(); //pauses game -- basically stops cant unpause only restart
-            MainMenu.enabled = true;
-            Timer(false);
-            timeRemaining = saveTime;
-            //calculate score
+
+        // set match score text
+        // set highscore text if needed
+
+        matchScore = 0; // Needs to happen after setting match text.
+    }
+
+    public void Timer()
+    {
+        if (!gamePaused)
+        {
+            currentTime -= Time.deltaTime;
+
+            int minutes = Mathf.FloorToInt(currentTime / 60f);
+            int seconds = Mathf.FloorToInt(currentTime % 60f);
+
+            timeText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+
+            if (currentTime <= 0f)
+            {
+                Debug.Log("Lose");
+                gamePaused = true;
+            }
         }
     }
 
-    void Timer(bool gameRunning)
+    public void AddToMatchScore(int points)
     {
-        if (!gameRunning)
-        {
-            timeRemaining -= Time.deltaTime;
+        matchScore += points;
+    }
 
-            float minutes = Mathf.FloorToInt(timeRemaining / 60);
-            float seconds = Mathf.FloorToInt(timeRemaining % 60);
-            timeText.text = string.Format("{0:00} : {1:00}", minutes, seconds);
-
-            if (timeRemaining <= 0)
-            {
-                spawner.setGamePaused();
-            }
-        }
+    /// <summary>
+    /// Gets the game 'paused' state indicating that the game is either running or not.
+    /// </summary>
+    /// <returns>True if paused, falsed if the game is running</returns>
+    public bool GetGameStatus()
+    {
+        return gamePaused;
     }
 }
