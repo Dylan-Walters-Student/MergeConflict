@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 9933ec22d1c115449ba0eda031c095c2
+guid: ffecca5dd2ecced43a08dd810bb8389c
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -97,5 +97,5 @@ AssetOrigin:
   productId: 179302
   packageName: Minimalist Icons
   packageVersion: 1.0
-  assetPath: Assets/Sprites/Restart.png
+  assetPath: Assets/Sprite/Icons/Light/Uncheck.png
   uploadId: 390694

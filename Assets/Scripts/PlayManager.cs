@@ -14,7 +14,7 @@ public class PlayManager : MonoBehaviour
     [SerializeField] TMP_Text matchScoreText;
 
     [SerializeField] TMP_Text timeText;
-    [SerializeField] float totalTime = 180f;
+    [SerializeField] float totalTime;
     [SerializeField] float currentTime;
 
     [Header("Game Function Testers")]
@@ -127,6 +127,11 @@ public class PlayManager : MonoBehaviour
     public void AddToMatchScore(int points)
     {
         matchScore += points;
+    }
+
+    public void SetGameTime(float newGameTime)
+    {
+        totalTime = newGameTime;
     }
 
     /// <summary>
