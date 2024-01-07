@@ -5,6 +5,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class ButtonFollowVisual : MonoBehaviour
 {
+    [SerializeField] PlayManager playManager;
     [SerializeField] Transform visualTarget;
     [SerializeField] Vector3 localAxis;
     [SerializeField] float resetSpeed = 5f;
@@ -81,6 +82,23 @@ public class ButtonFollowVisual : MonoBehaviour
         if (hover.interactorObject is XRPokeInteractor)
         {
             freeze = true;
+        }
+    }
+
+    public void Pause(BaseInteractionEventArgs hover)
+    {
+        if (hover.interactorObject is XRPokeInteractor)
+        {
+            playManager.Pause();
+        }
+    }
+
+    public void Stop(BaseInteractionEventArgs hover)
+    {
+        if (hover.interactorObject is XRPokeInteractor)
+        {
+            //stops game
+            playManager.WinLose();
         }
     }
 }

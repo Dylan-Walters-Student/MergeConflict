@@ -10,6 +10,8 @@ public class PlayManager : MonoBehaviour
 
     [SerializeField] Spawner spawner;
     [SerializeField] GameObject menu;
+    [SerializeField] TMP_Text menuPlayText;
+
     [SerializeField] TMP_Text highscoreText;
     [SerializeField] TMP_Text matchScoreText;
 
@@ -28,6 +30,8 @@ public class PlayManager : MonoBehaviour
 
     void Start()
     {
+        menuPlayText.text = "Play!";
+        UpdateMenuScoreText();
         gamePaused = true;
     }
 
@@ -60,11 +64,11 @@ public class PlayManager : MonoBehaviour
         spawner.DestroyPreviousBalls();
     }
 
-    //not implemented yet
     public void Pause()
     {
         SetHighscore();
         UpdateMenuScoreText();
+        menuPlayText.text = "Continue!";
         menu.SetActive(true);
         gamePaused = true;
     }
@@ -73,6 +77,7 @@ public class PlayManager : MonoBehaviour
     public void Continue()
     {
         menu.SetActive(false);
+        menuPlayText.text = "Play!";
         gamePaused = false;
     }
 

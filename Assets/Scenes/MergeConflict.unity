@@ -2580,6 +2580,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2168b245ba139574ab833ed21cee1e45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playManager: {fileID: 0}
   visualTarget: {fileID: 1252412990}
   localAxis: {x: 0, y: -1, z: 0}
   resetSpeed: 5
@@ -2874,6 +2875,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawner: {fileID: 1929108976}
   menu: {fileID: 2068973913}
+  menuPlayText: {fileID: 1542798252}
   highscoreText: {fileID: 1995950567}
   matchScoreText: {fileID: 587369669}
   timeText: {fileID: 314928475}
@@ -5375,6 +5377,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2168b245ba139574ab833ed21cee1e45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playManager: {fileID: 0}
   visualTarget: {fileID: 1953810058}
   localAxis: {x: 0, y: -1, z: 0}
   resetSpeed: 5
