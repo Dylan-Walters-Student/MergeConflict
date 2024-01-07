@@ -19,6 +19,10 @@ public class PlayManager : MonoBehaviour
     [SerializeField] float totalTime;
     [SerializeField] float currentTime;
 
+    [Header("Back Ground Music")]
+    [SerializeField] AudioSource audioSourceCamera;
+    [SerializeField] List<AudioClip> musicList;
+
     [Header("Game Function Testers")]
     // I have this to test without a headset on
     [SerializeField] bool TestPlay;
@@ -37,6 +41,7 @@ public class PlayManager : MonoBehaviour
 
     void Update()
     {
+        PlayMusic();
         Timer();
 
         // for testing purposes
@@ -69,6 +74,7 @@ public class PlayManager : MonoBehaviour
         SetHighscore();
         UpdateMenuScoreText();
         menuPlayText.text = "Continue!";
+        // change menu button to use continue
         menu.SetActive(true);
         gamePaused = true;
     }
@@ -78,6 +84,7 @@ public class PlayManager : MonoBehaviour
     {
         menu.SetActive(false);
         menuPlayText.text = "Play!";
+        //set menu button to use play
         gamePaused = false;
     }
 
@@ -146,5 +153,16 @@ public class PlayManager : MonoBehaviour
     public bool GetGameStatus()
     {
         return gamePaused;
+    }
+
+    private void PlayMusic()
+    {
+        if (!audioSourceCamera.isPlaying && musicList != null)
+        {
+            int randomPosition = Random.Range(0, musicList.Count - 1);
+
+            audioSourceCamera.clip = musicList[randomPosition];
+            audioSourceCamera.Play();
+        }
     }
 }

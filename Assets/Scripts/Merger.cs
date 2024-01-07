@@ -1,15 +1,20 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Merger
 {
     public class Merger : MonoBehaviour
     {
-        public bool doNothing;
+        private bool doNothing;
 
         private bool mergable;
 
         private PlayManager playManager;
+
+        private AudioSource audioSourceBall;
+
+        [SerializeField] AudioClip mergeSound;
 
         [SerializeField]
         private GameObject ballTwo;
@@ -32,18 +37,19 @@ namespace Merger
         private void Start()
         {
             playManager = FindAnyObjectByType<PlayManager>();
+            audioSourceBall = gameObject.AddComponent<AudioSource>();
+
+            audioSourceBall.clip = mergeSound;
         }
 
         private void OnTriggerEnter(Collider other)
         {
-            Debug.Log(playManager.GetGameStatus());
             if (other.tag == "MergeZone" && !playManager.GetGameStatus())
             {
                 mergable = true;
             }
-            Debug.Log(mergable);
         }
-
+        
         private void OnCollisionEnter(Collision collision)
         {
             if (collision.gameObject.tag == gameObject.tag && gameObject.tag != ballSeven.tag && mergable)
@@ -86,6 +92,8 @@ namespace Merger
                         playManager.WinLose();
                         break;
                 }
+
+                audioSourceBall.GetComponent<AudioSource>().Play();
 
                 Destroy(gameObject);
                 mergable = false;
