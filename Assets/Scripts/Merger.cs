@@ -9,7 +9,6 @@ namespace Merger
 
         private bool mergable;
 
-        [SerializeField]
         private PlayManager playManager;
 
         [SerializeField]
@@ -30,12 +29,19 @@ namespace Merger
         [SerializeField]
         private GameObject ballSeven;
 
+        private void Start()
+        {
+            playManager = FindAnyObjectByType<PlayManager>();
+        }
+
         private void OnTriggerEnter(Collider other)
         {
+            Debug.Log(playManager.GetGameStatus());
             if (other.tag == "MergeZone" && !playManager.GetGameStatus())
             {
                 mergable = true;
             }
+            Debug.Log(mergable);
         }
 
         private void OnCollisionEnter(Collision collision)
@@ -81,7 +87,7 @@ namespace Merger
                         break;
                 }
 
-                //Destroy(gameObject); // ???
+                Destroy(gameObject);
                 mergable = false;
             }
         }
