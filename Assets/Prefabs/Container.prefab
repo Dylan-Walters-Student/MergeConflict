@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 4154977340276081193}
   - component: {fileID: 1044297864434280852}
   m_Layer: 0
-  m_Name: SpawnerPlaceHolder
+  m_Name: Spawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4893,7 +4893,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc29739cdfdd53d42855df59c9a52468, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameActive: 0
+  playManager: {fileID: 0}
   ballOne: {fileID: 4393183295525201456, guid: a9fa30572f21d614ea5958503d77e310, type: 3}
   balltwo: {fileID: 1253418801390527327, guid: f1cce767c48e06a40acceac4a508df83, type: 3}
   ballThree: {fileID: 1018555988309545689, guid: 86fa84271eca030478e6e6ffca558096,
@@ -6614,7 +6614,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.979, y: 0.499, z: 0.6529443}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.55691683, y: 3.4137845, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4154977341511257118}

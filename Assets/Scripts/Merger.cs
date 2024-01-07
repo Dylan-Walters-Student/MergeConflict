@@ -81,7 +81,7 @@ namespace Merger
                         break;
                 }
 
-                Destroy(gameObject);
+                //Destroy(gameObject); // ???
                 mergable = false;
             }
         }

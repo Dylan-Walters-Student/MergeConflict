@@ -6,14 +6,22 @@ using UnityEngine.UIElements;
 
 public class PlayManager : MonoBehaviour
 {
-    [SerializeField] bool gamePaused;
+    private bool gamePaused;
 
     [SerializeField] Spawner spawner;
-    [SerializeField] Canvas MainMenu;
+    [SerializeField] GameObject menu;
+    [SerializeField] TMP_Text highscoreText;
+    [SerializeField] TMP_Text matchScoreText;
 
     [SerializeField] TMP_Text timeText;
-    [SerializeField] float totalTime = 60f;
+    [SerializeField] float totalTime = 180f;
     [SerializeField] float currentTime;
+
+    [Header("Game Function Testers")]
+    // I have this to test without a headset on
+    [SerializeField] bool TestPlay;
+    [SerializeField] bool TestPause;
+    [SerializeField] bool TestContinue;
 
     private int highScore;
     private int matchScore;
@@ -26,24 +34,45 @@ public class PlayManager : MonoBehaviour
     void Update()
     {
         Timer();
+
+        // for testing purposes
+        if (TestPlay)
+        {
+            Play();
+        }
+
+        if (TestPause)
+        {
+            Pause();
+        }
+
+        if (TestContinue)
+        {
+            Continue();
+        }
     }
 
     public void Play()
     {
-        MainMenu.enabled = false;
+        currentTime = totalTime;
+        menu.SetActive(false);
         gamePaused = false;
         spawner.DestroyPreviousBalls();
     }
 
+    //not implemented yet
     public void Pause()
     {
-        MainMenu.enabled = true;
+        SetHighscore();
+        UpdateMenuScoreText();
+        menu.SetActive(true);
         gamePaused = true;
     }
 
+    // not implimented yet
     public void Continue()
     {
-        MainMenu.enabled = false;
+        menu.SetActive(false);
         gamePaused = false;
     }
 
@@ -52,18 +81,12 @@ public class PlayManager : MonoBehaviour
     public void WinLose()
     {
         gamePaused = true;
-        MainMenu.enabled = true;
+
+        SetHighscore();
+        UpdateMenuScoreText();
+
+        menu.SetActive(true);
         currentTime = totalTime;
-
-        // sets match score
-        if (matchScore > highScore)
-        {
-            highScore = matchScore;
-        }
-
-        // set match score text
-        // set highscore text if needed
-
         matchScore = 0; // Needs to happen after setting match text.
     }
 
@@ -80,10 +103,25 @@ public class PlayManager : MonoBehaviour
 
             if (currentTime <= 0f)
             {
-                Debug.Log("Lose");
+                // Showing a popup to say the timer ran out would be nice
+                WinLose();
                 gamePaused = true;
             }
         }
+    }
+
+    private void SetHighscore()
+    {
+        if (matchScore > highScore)
+        {
+            highScore = matchScore;
+        }
+    }
+
+    private void UpdateMenuScoreText()
+    {
+        highscoreText.text = highScore.ToString();
+        matchScoreText.text = highScore.ToString();
     }
 
     public void AddToMatchScore(int points)
