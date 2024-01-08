@@ -11,6 +11,7 @@ public class PlayManager : MonoBehaviour
     [SerializeField] Spawner spawner;
     [SerializeField] GameObject menu;
     [SerializeField] TMP_Text menuPlayText;
+    [SerializeField] Material podiumIndicator;
 
     [SerializeField] TMP_Text highscoreText;
     [SerializeField] TMP_Text matchScoreText;
@@ -28,12 +29,14 @@ public class PlayManager : MonoBehaviour
     [SerializeField] bool TestPlay;
     [SerializeField] bool TestPause;
     [SerializeField] bool TestContinue;
+    [SerializeField] bool TestWinLose;
 
     private int highScore;
     private int matchScore;
 
     void Start()
     {
+        podiumIndicator.color = new Color(150/255f, 52/255f, 52/255f, 61/255f);
         menuPlayText.text = "Play!";
         UpdateMenuScoreText();
         gamePaused = true;
@@ -59,6 +62,11 @@ public class PlayManager : MonoBehaviour
         {
             Continue();
         }
+
+        if (TestWinLose)
+        {
+            WinLose();
+        }
     }
 
     public void Play()
@@ -67,6 +75,7 @@ public class PlayManager : MonoBehaviour
         menu.SetActive(false);
         gamePaused = false;
         spawner.DestroyPreviousBalls();
+        podiumIndicator.color = new Color(113/255f, 113/255f, 113/255f, 61/255f);
     }
 
     public void Pause()
@@ -74,7 +83,8 @@ public class PlayManager : MonoBehaviour
         SetHighscore();
         UpdateMenuScoreText();
         menuPlayText.text = "Continue!";
-        // change menu button to use continue
+        // change menu button to use continue image
+        podiumIndicator.color = new Color(150/255f, 52/255f, 52/255f, 61/255f);
         menu.SetActive(true);
         gamePaused = true;
     }
@@ -82,9 +92,10 @@ public class PlayManager : MonoBehaviour
     // not implimented yet
     public void Continue()
     {
+        podiumIndicator.color = new Color(113/255f, 113/255f, 113/255f, 61/255f);
         menu.SetActive(false);
         menuPlayText.text = "Play!";
-        //set menu button to use play
+        //set menu button to use play image
         gamePaused = false;
     }
 
@@ -93,6 +104,7 @@ public class PlayManager : MonoBehaviour
     public void WinLose()
     {
         gamePaused = true;
+        podiumIndicator.color = new Color(150/255f, 52/255f, 52/255f, 61/255f);
 
         SetHighscore();
         UpdateMenuScoreText();
@@ -133,7 +145,7 @@ public class PlayManager : MonoBehaviour
     private void UpdateMenuScoreText()
     {
         highscoreText.text = highScore.ToString();
-        matchScoreText.text = highScore.ToString();
+        matchScoreText.text = matchScore.ToString();
     }
 
     public void AddToMatchScore(int points)

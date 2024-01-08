@@ -60,11 +60,11 @@ public class Spawner : MonoBehaviour
 
             int randomBall = Random.Range(0, 100);
             if (randomBall < 70)
-                Instantiate(ballOne, position, rotation, ballHolder.transform);
+                Instantiate(ballOne, position, rotation, GetBallHolderTransform());
             else if (randomBall < 90)
-                Instantiate(balltwo, position, rotation, ballHolder.transform);
+                Instantiate(balltwo, position, rotation, GetBallHolderTransform());
             else
-                Instantiate(ballThree, position, rotation, ballHolder.transform);
+                Instantiate(ballThree, position, rotation, GetBallHolderTransform());
 
             waitingTime = Random.Range(lowSpawnSpeed, HighSpawnSpeed);
             timer = 0;
@@ -74,5 +74,10 @@ public class Spawner : MonoBehaviour
     public void DestroyPreviousBalls() {
         Destroy(ballHolder);
         ballHolder = new GameObject("GameBallHolder");
+    }
+
+    public Transform GetBallHolderTransform()
+    {
+        return ballHolder.transform;
     }
 }

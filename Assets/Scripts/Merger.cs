@@ -10,11 +10,14 @@ namespace Merger
 
         private bool mergable;
 
+        private Spawner spawner;
+
         private PlayManager playManager;
 
         private AudioSource audioSourceBall;
 
-        [SerializeField] AudioClip mergeSound;
+        [SerializeField] 
+        private AudioClip mergeSound;
 
         [SerializeField]
         private GameObject ballTwo;
@@ -36,6 +39,7 @@ namespace Merger
 
         private void Start()
         {
+            spawner = FindAnyObjectByType<Spawner>();
             playManager = FindAnyObjectByType<PlayManager>();
             audioSourceBall = gameObject.AddComponent<AudioSource>();
 
@@ -64,30 +68,27 @@ namespace Merger
                 switch (gameObject.tag)
                 {
                     case "BallOne":
-                        Instantiate(ballTwo, lastPosition, lastRotation);
+                        Instantiate(ballTwo, lastPosition, lastRotation, spawner.GetBallHolderTransform());
                         playManager.AddToMatchScore(1);
                         break;
                     case "BallTwo":
-                        Instantiate(ballThree, lastPosition, lastRotation);
+                        Instantiate(ballThree, lastPosition, lastRotation, spawner.GetBallHolderTransform());
                         playManager.AddToMatchScore(2);
                         break;
                     case "BallThree":
-                        Instantiate(ballFour, lastPosition, lastRotation);
+                        Instantiate(ballFour, lastPosition, lastRotation, spawner.GetBallHolderTransform());
                         playManager.AddToMatchScore(4);
                         break;
                     case "BallFour":
-                        Instantiate(ballFive, lastPosition, lastRotation);
+                        Instantiate(ballFive, lastPosition, lastRotation, spawner.GetBallHolderTransform());
                         playManager.AddToMatchScore(8);
                         break;
                     case "BallFive":
-                        Instantiate(ballSix, lastPosition, lastRotation);
+                        Instantiate(ballSix, lastPosition, lastRotation, spawner.GetBallHolderTransform());
                         playManager.AddToMatchScore(16);
                         break;
                     case "BallSix":
-                        Instantiate(ballSeven, lastPosition, lastRotation);
-                        playManager.AddToMatchScore(32);
-                        break;
-                    case "BallSeven":
+                        Instantiate(ballSeven, lastPosition, lastRotation, spawner.GetBallHolderTransform());
                         playManager.AddToMatchScore(64);
                         playManager.WinLose();
                         break;
@@ -95,6 +96,7 @@ namespace Merger
 
                 audioSourceBall.GetComponent<AudioSource>().Play();
 
+                // destroy otherwise extra ball spawns
                 Destroy(gameObject);
                 mergable = false;
             }
