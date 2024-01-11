@@ -14,7 +14,7 @@ public class Spawner : MonoBehaviour
 
     [SerializeField] float lowSpawnSpeed, HighSpawnSpeed;
 
-    [SerializeField] float spawnRadius = 0.28f;
+    [SerializeField] float spawnRadius = 0.26f;
 
     GameObject ballHolder;
 
@@ -42,6 +42,7 @@ public class Spawner : MonoBehaviour
     private void SpawnBalls(){
         timer += Time.deltaTime;
 
+        // TODO: @DW Fix this, the idea was made but never added
         if (lowSpawnSpeed < -0.2f && HighSpawnSpeed > 0.2f)
         {
             // the idea is to increase spawn rate as the game goes on. Fix?

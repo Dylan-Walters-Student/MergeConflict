@@ -5,6 +5,8 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class ButtonFollowVisual : MonoBehaviour
 {
+    [SerializeField] bool isPauseButton;
+
     [SerializeField] PlayManager playManager;
     [SerializeField] Transform visualTarget;
     [SerializeField] Vector3 localAxis;
@@ -29,6 +31,11 @@ public class ButtonFollowVisual : MonoBehaviour
         interactable.hoverEntered.AddListener(Follow);
         interactable.hoverExited.AddListener(ResetButton);
         interactable.selectEntered.AddListener(Freeze);
+
+        if (isPauseButton)
+            interactable.selectEntered.AddListener(Pause);
+        else
+            interactable.selectEntered.AddListener(Stop);
     }
 
     void Update()
@@ -87,18 +94,11 @@ public class ButtonFollowVisual : MonoBehaviour
 
     public void Pause(BaseInteractionEventArgs hover)
     {
-        if (hover.interactorObject is XRPokeInteractor)
-        {
-            playManager.Pause();
-        }
+        playManager.Pause();
     }
 
     public void Stop(BaseInteractionEventArgs hover)
     {
-        if (hover.interactorObject is XRPokeInteractor)
-        {
-            //stops game
-            playManager.WinLose();
-        }
+        playManager.WinLose();
     }
 }

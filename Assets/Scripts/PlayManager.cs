@@ -12,6 +12,8 @@ public class PlayManager : MonoBehaviour
     [SerializeField] GameObject menu;
     [SerializeField] TMP_Text menuPlayText;
     [SerializeField] Material podiumIndicator;
+    [SerializeField] GameObject pauseButton;
+    [SerializeField] GameObject stopButton;
 
     [SerializeField] TMP_Text highscoreText;
     [SerializeField] TMP_Text matchScoreText;
@@ -36,6 +38,8 @@ public class PlayManager : MonoBehaviour
 
     void Start()
     {
+        pauseButton.SetActive(false);
+        stopButton.SetActive(false);
         podiumIndicator.color = new Color(150/255f, 52/255f, 52/255f, 61/255f);
         menuPlayText.text = "Play!";
         UpdateMenuScoreText();
@@ -71,6 +75,8 @@ public class PlayManager : MonoBehaviour
 
     public void Play()
     {
+        pauseButton.SetActive(true);
+        stopButton.SetActive(true);
         currentTime = totalTime;
         menu.SetActive(false);
         gamePaused = false;
@@ -80,6 +86,8 @@ public class PlayManager : MonoBehaviour
 
     public void Pause()
     {
+        pauseButton.SetActive(false);
+        stopButton.SetActive(false);
         SetHighscore();
         UpdateMenuScoreText();
         menuPlayText.text = "Continue!";
@@ -92,6 +100,8 @@ public class PlayManager : MonoBehaviour
     // not implimented yet
     public void Continue()
     {
+        pauseButton.SetActive(true);
+        stopButton.SetActive(true);
         podiumIndicator.color = new Color(113/255f, 113/255f, 113/255f, 61/255f);
         menu.SetActive(false);
         menuPlayText.text = "Play!";
@@ -103,6 +113,9 @@ public class PlayManager : MonoBehaviour
     //Might seperate later if different conditions apply
     public void WinLose()
     {
+        pauseButton.SetActive(false);
+        stopButton.SetActive(false);
+
         gamePaused = true;
         podiumIndicator.color = new Color(150/255f, 52/255f, 52/255f, 61/255f);
 

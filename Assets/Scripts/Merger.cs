@@ -94,7 +94,7 @@ namespace Merger
                         break;
                 }
 
-                audioSourceBall.GetComponent<AudioSource>().Play();
+                audioSourceBall.Play();
 
                 // destroy otherwise extra ball spawns
                 Destroy(gameObject);
