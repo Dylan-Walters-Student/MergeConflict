@@ -9,18 +9,21 @@ public class PlayManager : MonoBehaviour
     private bool gamePaused;
 
     [SerializeField] Spawner spawner;
-    [SerializeField] GameObject menu;
-    [SerializeField] TMP_Text menuPlayText;
     [SerializeField] Material podiumIndicator;
     [SerializeField] GameObject pauseButton;
     [SerializeField] GameObject stopButton;
-
     [SerializeField] TMP_Text highscoreText;
     [SerializeField] TMP_Text matchScoreText;
 
     [SerializeField] TMP_Text timeText;
     [SerializeField] float totalTime;
     [SerializeField] float currentTime;
+
+    [Header("Menus")]
+    [SerializeField] GameObject PlayMenu;
+    [SerializeField] GameObject SettingsMenu;
+    [SerializeField] GameObject scoreboardMenu;
+    [SerializeField] TMP_Text menuPlayText;
 
     [Header("Back Ground Music")]
     [SerializeField] AudioSource audioSourceCamera;
@@ -78,7 +81,7 @@ public class PlayManager : MonoBehaviour
         pauseButton.SetActive(true);
         stopButton.SetActive(true);
         currentTime = totalTime;
-        menu.SetActive(false);
+        //menu.SetActive(false);
         gamePaused = false;
         spawner.DestroyPreviousBalls();
         podiumIndicator.color = new Color(113/255f, 113/255f, 113/255f, 61/255f);
@@ -93,7 +96,7 @@ public class PlayManager : MonoBehaviour
         menuPlayText.text = "Continue!";
         // change menu button to use continue image
         podiumIndicator.color = new Color(150/255f, 52/255f, 52/255f, 61/255f);
-        menu.SetActive(true);
+        //menu.SetActive(true);
         gamePaused = true;
     }
 
@@ -103,7 +106,7 @@ public class PlayManager : MonoBehaviour
         pauseButton.SetActive(true);
         stopButton.SetActive(true);
         podiumIndicator.color = new Color(113/255f, 113/255f, 113/255f, 61/255f);
-        menu.SetActive(false);
+        //menu.SetActive(false);
         menuPlayText.text = "Play!";
         //set menu button to use play image
         gamePaused = false;
@@ -122,7 +125,7 @@ public class PlayManager : MonoBehaviour
         SetHighscore();
         UpdateMenuScoreText();
 
-        menu.SetActive(true);
+        //menu.SetActive(true);
         currentTime = totalTime;
         matchScore = 0; // Needs to happen after setting match text.
     }
