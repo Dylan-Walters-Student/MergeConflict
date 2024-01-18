@@ -4,22 +4,19 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - SuperBall
-  - BigBall
-  - MediumBall
-  - SmallBall
-  - SuperSmallBall
   - BallOne
   - BallTwo
   - BallThree
   - BallFour
   - BallFive
   - BallSix
+  - BallSeven
+  - MergeZone
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Objects
   - Water
   - UI
   - 

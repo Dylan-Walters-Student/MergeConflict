@@ -22,8 +22,8 @@ public class PlayManager : MonoBehaviour
     [Header("Menus")]
     [SerializeField] GameObject PlayMenu;
     [SerializeField] GameObject SettingsMenu;
-    [SerializeField] GameObject scoreboardMenu;
-    [SerializeField] TMP_Text menuPlayText;
+    [SerializeField] GameObject ScoreboardMenu;
+    [SerializeField] GameObject AboutMenu;
 
     [Header("Back Ground Music")]
     [SerializeField] AudioSource audioSourceCamera;
@@ -41,10 +41,10 @@ public class PlayManager : MonoBehaviour
 
     void Start()
     {
+        MainMenu();
         pauseButton.SetActive(false);
         stopButton.SetActive(false);
         podiumIndicator.color = new Color(150/255f, 52/255f, 52/255f, 61/255f);
-        menuPlayText.text = "Play!";
         UpdateMenuScoreText();
         gamePaused = true;
     }
@@ -81,7 +81,7 @@ public class PlayManager : MonoBehaviour
         pauseButton.SetActive(true);
         stopButton.SetActive(true);
         currentTime = totalTime;
-        //menu.SetActive(false);
+        PlayMenu.SetActive(false);
         gamePaused = false;
         spawner.DestroyPreviousBalls();
         podiumIndicator.color = new Color(113/255f, 113/255f, 113/255f, 61/255f);
@@ -93,21 +93,18 @@ public class PlayManager : MonoBehaviour
         stopButton.SetActive(false);
         SetHighscore();
         UpdateMenuScoreText();
-        menuPlayText.text = "Continue!";
         // change menu button to use continue image
         podiumIndicator.color = new Color(150/255f, 52/255f, 52/255f, 61/255f);
-        //menu.SetActive(true);
+        PlayMenu.SetActive(true);
         gamePaused = true;
     }
 
-    // not implimented yet
     public void Continue()
     {
         pauseButton.SetActive(true);
         stopButton.SetActive(true);
         podiumIndicator.color = new Color(113/255f, 113/255f, 113/255f, 61/255f);
-        //menu.SetActive(false);
-        menuPlayText.text = "Play!";
+        PlayMenu.SetActive(false);
         //set menu button to use play image
         gamePaused = false;
     }
@@ -125,9 +122,39 @@ public class PlayManager : MonoBehaviour
         SetHighscore();
         UpdateMenuScoreText();
 
-        //menu.SetActive(true);
+        PlayMenu.SetActive(true);
         currentTime = totalTime;
         matchScore = 0; // Needs to happen after setting match text.
+    }
+
+    public void MainMenu()
+    {
+        PlayMenu.SetActive(true);
+        SettingsMenu.SetActive(false);
+        ScoreboardMenu.SetActive(false);
+        AboutMenu.SetActive(false);
+    }
+
+    public void Settings()
+    {
+        PlayMenu.SetActive(false);
+        SettingsMenu.SetActive(true);
+        ScoreboardMenu.SetActive(false);
+        AboutMenu.SetActive(false);
+    }
+    public void Scoreboard()
+    {
+        PlayMenu.SetActive(false);
+        SettingsMenu.SetActive(false);
+        ScoreboardMenu.SetActive(true);
+        AboutMenu.SetActive(false);
+    }
+    public void About()
+    {
+        PlayMenu.SetActive(false);
+        SettingsMenu.SetActive(false);
+        ScoreboardMenu.SetActive(false);
+        AboutMenu.SetActive(true);
     }
 
     public void Timer()
@@ -143,7 +170,6 @@ public class PlayManager : MonoBehaviour
 
             if (currentTime <= 0f)
             {
-                // Showing a popup to say the timer ran out would be nice
                 WinLose();
                 gamePaused = true;
             }
