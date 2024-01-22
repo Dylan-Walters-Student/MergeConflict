@@ -1,9 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using TMPro;
-using UnityEngine.UIElements;
 using BayatGames.SaveGameFree;
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
 
 public class PlayManager : MonoBehaviour
 {
@@ -11,31 +9,23 @@ public class PlayManager : MonoBehaviour
 
     [SerializeField] Spawner spawner;
     [SerializeField] Material podiumIndicator;
-    [SerializeField] GameObject pauseButton;
-    [SerializeField] GameObject stopButton;
-    [SerializeField] TMP_Text highscoreText;
-    [SerializeField] TMP_Text matchScoreText;
 
-    [SerializeField] TMP_Text timeText;
-    [SerializeField] float totalTime;
-    [SerializeField] float currentTime;
+    TMP_Text highscoreText;
+    TMP_Text matchScoreText;
+    TMP_Text timeText;
+    float totalTime;
+    float currentTime;
 
     [Header("Menus")]
     [SerializeField] GameObject PlayMenu;
     [SerializeField] GameObject SettingsMenu;
     [SerializeField] GameObject ScoreboardMenu;
     [SerializeField] GameObject AboutMenu;
+    [SerializeField] GameObject HandMenu;
 
     [Header("Back Ground Music")]
     [SerializeField] AudioSource audioSourceCamera;
     [SerializeField] List<AudioClip> musicList;
-
-    [Header("Game Function Testers")]
-    // I have this to test without a headset on
-    [SerializeField] bool TestPlay;
-    [SerializeField] bool TestPause;
-    [SerializeField] bool TestContinue;
-    [SerializeField] bool TestWinLose;
 
     private int highScore;
     private int matchScore;
@@ -48,8 +38,6 @@ public class PlayManager : MonoBehaviour
     void Start()
     {
         MainMenu();
-        pauseButton.SetActive(false);
-        stopButton.SetActive(false);
         podiumIndicator.color = new Color(150/255f, 52/255f, 52/255f, 61/255f);
         UpdateMenuScoreText();
         gamePaused = true;
@@ -59,35 +47,12 @@ public class PlayManager : MonoBehaviour
     {
         PlayMusic();
         Timer();
-
-        // for testing purposes
-        if (TestPlay)
-        {
-            Play();
-        }
-
-        if (TestPause)
-        {
-            Pause();
-        }
-
-        if (TestContinue)
-        {
-            Continue();
-        }
-
-        if (TestWinLose)
-        {
-            WinLose();
-        }
     }
 
     public void Play()
     {
-        pauseButton.SetActive(true);
-        stopButton.SetActive(true);
+        CloseMenu();
         currentTime = totalTime;
-        PlayMenu.SetActive(false);
         gamePaused = false;
         spawner.DestroyPreviousBalls();
         podiumIndicator.color = new Color(113/255f, 113/255f, 113/255f, 61/255f);
@@ -95,40 +60,40 @@ public class PlayManager : MonoBehaviour
 
     public void Pause()
     {
-        pauseButton.SetActive(false);
-        stopButton.SetActive(false);
         SetHighscore();
         UpdateMenuScoreText();
-        // change menu button to use continue image
         podiumIndicator.color = new Color(150/255f, 52/255f, 52/255f, 61/255f);
-        PlayMenu.SetActive(true);
+        MainMenu();
         gamePaused = true;
     }
 
     public void Continue()
     {
-        pauseButton.SetActive(true);
-        stopButton.SetActive(true);
+        CloseMenu();
         podiumIndicator.color = new Color(113/255f, 113/255f, 113/255f, 61/255f);
-        PlayMenu.SetActive(false);
-        //set menu button to use play image
         gamePaused = false;
     }
 
     public void WinLose()
     {
-        pauseButton.SetActive(false);
-        stopButton.SetActive(false);
-
         gamePaused = true;
         podiumIndicator.color = new Color(150/255f, 52/255f, 52/255f, 61/255f);
 
         SetHighscore();
         UpdateMenuScoreText();
+        MainMenu();
 
-        PlayMenu.SetActive(true);
         currentTime = totalTime;
         matchScore = 0; // Needs to happen after setting match text.
+    }
+
+    public void CloseMenu()
+    {
+        PlayMenu.SetActive(false);
+        SettingsMenu.SetActive(false);
+        ScoreboardMenu.SetActive(false);
+        AboutMenu.SetActive(false);
+        HandMenu.SetActive(true);
     }
 
     public void MainMenu()
@@ -137,6 +102,7 @@ public class PlayManager : MonoBehaviour
         SettingsMenu.SetActive(false);
         ScoreboardMenu.SetActive(false);
         AboutMenu.SetActive(false);
+        HandMenu.SetActive(false);
     }
 
     public void Settings()
@@ -145,6 +111,7 @@ public class PlayManager : MonoBehaviour
         SettingsMenu.SetActive(true);
         ScoreboardMenu.SetActive(false);
         AboutMenu.SetActive(false);
+        HandMenu.SetActive(false);
     }
     public void Scoreboard()
     {
@@ -152,6 +119,7 @@ public class PlayManager : MonoBehaviour
         SettingsMenu.SetActive(false);
         ScoreboardMenu.SetActive(true);
         AboutMenu.SetActive(false);
+        HandMenu.SetActive(false);
     }
     public void About()
     {
@@ -159,6 +127,7 @@ public class PlayManager : MonoBehaviour
         SettingsMenu.SetActive(false);
         ScoreboardMenu.SetActive(false);
         AboutMenu.SetActive(true);
+        HandMenu.SetActive(false);
     }
 
     public void Timer()
