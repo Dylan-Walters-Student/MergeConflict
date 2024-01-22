@@ -7,11 +7,13 @@ Library: C:\Users\ddwal\OneDrive\Documents\Unity\MergeConflict\Temp\BurstOutput\
 --dump=Function
 --float-precision=Standard
 --assembly-defines=Assembly-CSharp;
+--assembly-defines=FullSerializer;
 --assembly-defines=Mono.Security;
 --assembly-defines=mscorlib;
 --assembly-defines=System.Configuration;
 --assembly-defines=System.Core;
 --assembly-defines=System;
+--assembly-defines=System.Numerics;
 --assembly-defines=System.Xml;
 --assembly-defines=Unity.Burst;
 --assembly-defines=Unity.InputSystem;
@@ -97,11 +99,13 @@ Library: C:\Users\ddwal\OneDrive\Documents\Unity\MergeConflict\Temp\BurstOutput\
 --float-precision=Standard
 --float-mode=Fast
 --assembly-defines=Assembly-CSharp;
+--assembly-defines=FullSerializer;
 --assembly-defines=Mono.Security;
 --assembly-defines=mscorlib;
 --assembly-defines=System.Configuration;
 --assembly-defines=System.Core;
 --assembly-defines=System;
+--assembly-defines=System.Numerics;
 --assembly-defines=System.Xml;
 --assembly-defines=Unity.Burst;
 --assembly-defines=Unity.InputSystem;

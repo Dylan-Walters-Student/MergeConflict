@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UIElements;
+using BayatGames.SaveGameFree;
 
 public class PlayManager : MonoBehaviour
 {
@@ -38,6 +39,11 @@ public class PlayManager : MonoBehaviour
 
     private int highScore;
     private int matchScore;
+
+    void Awake()
+    {
+        highScore = SaveGame.Load<int>("Highscore");
+    }
 
     void Start()
     {
@@ -109,8 +115,6 @@ public class PlayManager : MonoBehaviour
         gamePaused = false;
     }
 
-    //Winning and loosing is the same thing atm
-    //Might seperate later if different conditions apply
     public void WinLose()
     {
         pauseButton.SetActive(false);
@@ -181,6 +185,7 @@ public class PlayManager : MonoBehaviour
         if (matchScore > highScore)
         {
             highScore = matchScore;
+            SaveGame.Save<int>("Highscore", highScore);
         }
     }
 
