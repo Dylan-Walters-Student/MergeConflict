@@ -2,7 +2,7 @@
 Merge Conflict is a fun, interactive, and casual game to play and learn the Meta headset's features such as passthrough and hand tracking.
 
 
-# Game Design Choices -------------------------------------------------------
+# Game Design Choices 
 Some game design choices may seem odd, but after some play testing and general understanding of games here is why I chose what I did!
 
 ### No Penalties!?
@@ -23,5 +23,5 @@ A game is not complete without a purpose. Having a score allows people to play a
 ### Balls, not blocks?
 I chose balls instead of my original idea of blocks (or any other object) As having balls would cause larger gaps in the box making the user debate on where to place the objects.
 
-# Object interactions -------------------------------------------------------
+# Object interactions 
 There are a total of 7 types of balls. Only balls of the same size and color can merge together. I used Velocity tracking on each ball as I found it to be the smoothest type of ball movement available in unity.
